@@ -1,0 +1,49 @@
+{
+	"name": "hackoss-admin",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"husky": "^1.3.1",
+		"lint-staged": "^8.1.0",
+		"prettier": "^1.16.1",
+		"react": "^16.7.0",
+		"react-dom": "^16.7.0",
+		"react-router-dom": "^4.3.1",
+		"react-scripts": "2.1.3",
+		"styled-components": "^4.1.3"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint:css": "stylelint './src/**/*.js'"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+			"prettier --single-quote --write",
+			"yarn lint:css",
+			"git add"
+		]
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"stylelint": "^9.10.1",
+		"stylelint-config-recommended": "^2.1.0",
+		"stylelint-config-styled-components": "^0.1.1",
+		"stylelint-processor-styled-components": "^1.5.2"
+	}
+}
