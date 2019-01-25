@@ -3,14 +3,13 @@ import styled, { keyframes } from 'styled-components';
 import Logo from 'components/Logo';
 
 const opacityAnimation = keyframes`
-	0% {
-		opacity: 1;
+	0%, 100% {
+		opacity: 0.5;
+		/* filter: invert(75%); */
 	}
 	50% {
-		opacity: 0.5;
-	}
-	100% {
 		opacity: 1;
+		/* filter: drop-shadow(0 0 1px #fff); */
 	}
 `;
 
