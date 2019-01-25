@@ -6,18 +6,18 @@ import LogoLight from 'assets/Logo_Light.png';
 
 const Img = styled.img`
 	display: block;
-	margin: auto;
-	height: ${props => props.sizes || props.theme.sizes};
+	height: ${props => props.size};
+	width: ${props => props.size};
 `;
 
 Img.defaultProps = {
-	sizes: '350px'
+	size: '250px'
 };
 
 class Logo extends PureComponent {
 	constructor(props) {
 		super(props);
-		switch (this.props.style) {
+		switch (this.props.LogoTheme) {
 			case 'dark':
 				this.logo = LogoDark;
 				break;

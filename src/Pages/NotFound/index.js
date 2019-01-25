@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import Container from 'Components/Container';
-import Logo from 'Components/Logo';
-import Heading from 'Components/Heading';
+import FullScreenContainer from 'components/FullScreenContainer';
+import Logo from 'components/Logo';
+import Heading from 'components/Heading';
 
-const MainPage = styled(Container)`
+const MainPage = styled(FullScreenContainer)`
 	/* ... */
 `;
 
-class App extends Component {
+class App extends PureComponent {
 	render() {
 		return (
 			<MainPage>

@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Container from 'Components/Container';
-import Logo from 'Components/Logo';
-import Login from 'Components/Login';
+import FullScreenContainer from 'components/FullScreenContainer';
+import Logo from 'components/Animated/Logo';
+import Login from 'components/Login';
 import { Redirect } from 'react-router-dom';
-import Auth from 'utils/Auth';
-
-const MainPage = styled(Container)`
+import { withFirebase } from 'api/firebase';
+const MainPage = styled(FullScreenContainer)`
 	/* ... */
 `;
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			authUser: null
+		};
+	}
+	componentDidMount() {
+		this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
+			console.log(authUser);
+			authUser ? this.setState({ authUser }) : this.setState({ authUser: null });
+		});
+	}
+	componentWillUnmount() {
+		this.listener();
+	}
 	render() {
 		let { from } = this.props.origin || { from: { pathname: '/' } };
-		return Auth.authenticated ? (
+		return this.state.authUser ? (
 			<Redirect to={from} />
 		) : (
 			<MainPage>
@@ -24,4 +38,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default withFirebase(App);

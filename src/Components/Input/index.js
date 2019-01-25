@@ -18,6 +18,7 @@ export default styled(Input)`
 	color: ${props => (props.type === 'submit' ? props.theme.highlight : props.theme.primary)};
 	border-radius: 5px;
 	font-size: 1.2rem;
+	transition: 0.5s;
 	&:hover {
 		background: ${props =>
 			props.type === 'submit' ? props.theme.highlight : props.theme.secondary};
