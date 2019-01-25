@@ -3765,7 +3765,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-firebase@^5.8.1:
+firebase@^5.8.0, firebase@^5.8.1:
   version "5.8.1"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-5.8.1.tgz#d802c29bc3a8a30fd4dd518d4f1586889dd5dc59"
   dependencies:
@@ -4180,6 +4180,13 @@ h2x-traverse@^1.1.0:
 h2x-types@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/h2x-types/-/h2x-types-1.1.0.tgz#ec0d5e3674e2207269f32976ac9c82aaff4818e6"
+
+hackoss@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/hackoss/-/hackoss-0.4.1.tgz#f0ec7574555f7f08c642d3c08f08305a4baaa038"
+  dependencies:
+    firebase "^5.8.0"
+    lodash "^4.17.11"
 
 handle-thing@^2.0.0:
   version "2.0.0"

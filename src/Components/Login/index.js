@@ -47,7 +47,7 @@ class Login extends PureComponent {
 				const { email, password } = this.state;
 				e.preventDefault();
 				this.props.firebase
-					.signIn(email, password)
+					.signin(email, password)
 					.then()
 					.then(() => {
 						this.props.history.push(ROUTE.LANDING);

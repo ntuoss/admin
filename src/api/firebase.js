@@ -16,9 +16,9 @@ class FirebaseApp {
 		firebase.initializeApp(config);
 		this.auth = firebase.auth();
 	}
-	signIn = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+	signin = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
 
-	signOut = () => this.auth.signOut();
+	signout = () => this.auth.signOut();
 }
 
 const withFirebase = Component => props => (

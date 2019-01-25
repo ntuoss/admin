@@ -21,7 +21,7 @@ const Colorize = {
 
 const Pastel = {
 	bg: '#a8e6cf',
-	primary: '#faaaa5',
+	primary: '#aaaaa5',
 	secondary: '#f2d3b6',
 	highlight: '#ef8b94',
 	hint: '#fcedc1',

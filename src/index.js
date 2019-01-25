@@ -12,10 +12,10 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'styles/GlobalStyle';
 import Theme from 'styles/Theme';
 
-// import Header from 'components/Header';
-
+import Header from 'components/Header';
 const HomePage = lazy(() => import('pages/HomePage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
+const SignoutPage = lazy(() => import('pages/SignoutPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
 const ProjectFormPage = lazy(() => import('pages/ProjectFormPage'));
 const ProjectsListPage = lazy(() => import('pages/ProjectsListPage'));
@@ -29,17 +29,21 @@ class App extends Component {
 					<React.Fragment>
 						<GlobalStyle />
 						<Router>
-							<Suspense fallback={<div />}>
-								<Switch>
-									<Route exact path={ROUTE.LANDING} component={() => <HomePage />} />
-									<Route path={ROUTE.LOG_IN} component={() => <LoginPage />} />
-									<PrivateRoute path={ROUTE.FORM} component={() => <ProjectFormPage />} />
-									<PrivateRoute path={ROUTE.PROJECTS} component={() => <ProjectsListPage />} />
-									{/* prettier-ignore */}
-									<PrivateRoute path={ROUTE.PROJECT_DETAIL} component={() => <ProjectDetailPage />} />
-									<Route component={() => <NotFound />} />
-								</Switch>
-							</Suspense>
+							<React.Fragment>
+								<Header />
+								<Suspense fallback={<div />}>
+									<Switch>
+										<Route exact path={ROUTE.LANDING} component={() => <HomePage />} />
+										<Route path={ROUTE.LOG_IN} component={() => <LoginPage />} />
+										<Route path={ROUTE.SIGN_OUT} component={() => <SignoutPage />} />
+										<PrivateRoute path={ROUTE.FORM} component={() => <ProjectFormPage />} />
+										<PrivateRoute path={ROUTE.PROJECTS} component={() => <ProjectsListPage />} />
+										{/* prettier-ignore */}
+										<PrivateRoute path={ROUTE.PROJECT_DETAIL} component={() => <ProjectDetailPage />} />
+										<Route component={() => <NotFound />} />
+									</Switch>
+								</Suspense>
+							</React.Fragment>
 						</Router>
 					</React.Fragment>
 				</ThemeProvider>
