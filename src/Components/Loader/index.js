@@ -3,7 +3,7 @@ import AnimatedLogo from 'components/Animated/Logo';
 import FullScreenContainer from 'components/FullScreenContainer';
 
 export default () => (
-	<FullScreenContainer>
-		<AnimatedLogo size="800px" />
-	</FullScreenContainer>
+  <FullScreenContainer>
+    <AnimatedLogo size="45vw" />
+  </FullScreenContainer>
 );

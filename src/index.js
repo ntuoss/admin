@@ -14,6 +14,16 @@ import Theme from 'styles/Theme';
 
 import Header from 'components/Header';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+import {
+  faUsers,
+  faUserAlt,
+  faCalendarAlt,
+  faImage,
+  faMapMarkerAlt
+} from '@fortawesome/free-solid-svg-icons';
+
 const HomePage = lazy(() => import('pages/HomePage'));
 const SigninPage = lazy(() => import('pages/SigninPage'));
 const SignoutPage = lazy(() => import('pages/SignoutPage'));
@@ -23,35 +33,42 @@ const ProjectsListPage = lazy(() => import('pages/ProjectsListPage'));
 const ProjectDetailPage = lazy(() => import('pages/ProjectDetailPage'));
 
 class App extends Component {
-	render() {
-		return (
-			<FirebaseContext.Provider value={new FirebaseApp()}>
-				<ThemeProvider theme={Theme}>
-					<React.Fragment>
-						<GlobalStyle />
-						<Router>
-							<React.Fragment>
-								<Header />
-								<Suspense fallback={<div />}>
-									<Switch>
-										<Route exact path={ROUTE.LANDING} component={() => <HomePage />} />
-										<Route path={ROUTE.LOG_IN} component={() => <SigninPage />} />
-										<Route path={ROUTE.SIGN_OUT} component={() => <SignoutPage />} />
-										<PrivateRoute path={ROUTE.FORM} component={() => <ProjectFormPage />} />
-										<PrivateRoute path={ROUTE.PROJECTS} component={() => <ProjectsListPage />} />
-										{/* prettier-ignore */}
-										<PrivateRoute path={ROUTE.PROJECT_DETAIL} component={() => <ProjectDetailPage />} />
-										<Route component={() => <NotFound />} />
-									</Switch>
-								</Suspense>
-							</React.Fragment>
-						</Router>
-					</React.Fragment>
-				</ThemeProvider>
-			</FirebaseContext.Provider>
-		);
-	}
+  render() {
+    return (
+      <FirebaseContext.Provider value={new FirebaseApp()}>
+        <ThemeProvider theme={Theme}>
+          <React.Fragment>
+            <GlobalStyle />
+            <Router>
+              <React.Fragment>
+                <Header />
+                <Suspense fallback={<div />}>
+                  <Switch>
+                    {/* prettier-ignore */}
+                    <Route exact path={ROUTE.LANDING} component={(props)=> <HomePage {...props}/>} />
+                    {/* prettier-ignore */}
+                    <Route path={ROUTE.LOG_IN} component={(props)=> <SigninPage {...props}/>} />
+                    {/* prettier-ignore */}
+                    <Route path={ROUTE.SIGN_OUT} component={props => <SignoutPage {...props} />} />
+                    {/* prettier-ignore */}
+                    <PrivateRoute path={ROUTE.FORM} component={(props)=> <ProjectFormPage {...props}/>} />
+                    {/* prettier-ignore */}
+                    <PrivateRoute exact path={ROUTE.PROJECTS} component={(props)=> <ProjectsListPage {...props}/>} />
+                    {/* prettier-ignore */}
+                    <PrivateRoute path={ROUTE.PROJECT_DETAIL} component={(props)=> <ProjectDetailPage {...props}/>} />
+                    <Route component={props => <NotFound {...props} />} />
+                  </Switch>
+                </Suspense>
+              </React.Fragment>
+            </Router>
+          </React.Fragment>
+        </ThemeProvider>
+      </FirebaseContext.Provider>
+    );
+  }
 }
+
+library.add(faUsers, faUserAlt, faCalendarAlt, faImage, faMapMarkerAlt);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
