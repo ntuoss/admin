@@ -8,10 +8,11 @@ const Form = styled.form`
 	box-sizing: border-box;
 `;
 
-class Login extends PureComponent {
+class Signin extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
+			processing: false,
 			email: process.env.REACT_APP_FIREBASE_EMAIL || '',
 			password: process.env.REACT_APP_FIREBASE_PASSWORD || ''
 		};
@@ -42,14 +43,16 @@ class Login extends PureComponent {
 		{
 			key: 'submit',
 			type: 'submit',
-			value: 'Sign In',
+			value: this.state.processing ? '...' : 'Sign In',
 			onClick: e => {
+				this.setState({ processing: true });
 				const { email, password } = this.state;
 				e.preventDefault();
 				this.props.firebase
 					.signin(email, password)
 					.then()
 					.then(() => {
+						this.setState({ processing: false });
 						this.props.history.push(ROUTE.LANDING);
 					});
 			}
@@ -66,4 +69,4 @@ class Login extends PureComponent {
 	}
 }
 
-export default withRouter(withFirebase(Login));
+export default withRouter(withFirebase(Signin));

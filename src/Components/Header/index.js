@@ -14,13 +14,17 @@ const HeaderItem = styled(Link)`
 	margin: 0 10px;
 	text-decoration: none;
 	color: ${props => props.theme.hint};
+	transition: 0.2s;
+	&:hover {
+		color: ${props => props.theme.highlight};
+	}
 `;
 
 class Header extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			authUser: null
+			authUser: 'init'
 		};
 		this.headerLinks = {
 			LANDING: () => 'Home',
@@ -37,20 +41,23 @@ class Header extends PureComponent {
 	componentWillUnmount() {
 		this.listener();
 	}
-
 	render() {
 		return (
-			<HeaderList>
-				{Object.keys(ROUTES).map(
-					item =>
-						this.headerLinks[item] && (
-							<HeaderItem to={ROUTES[item]}>{this.headerLinks[item]()}</HeaderItem>
-						)
-				)}
-				<HeaderItem to={this.state.authUser ? ROUTES.SIGN_OUT : ROUTES.LOG_IN}>
-					{this.state.authUser ? 'Sign Out' : 'Sign In'}
-				</HeaderItem>
-			</HeaderList>
+			this.state.authUser !== 'init' && (
+				<HeaderList>
+					{Object.keys(ROUTES).map(
+						item =>
+							this.headerLinks[item] && (
+								<HeaderItem key={item} to={ROUTES[item]}>
+									{this.headerLinks[item]()}
+								</HeaderItem>
+							)
+					)}
+					<HeaderItem to={this.state.authUser ? ROUTES.SIGN_OUT : ROUTES.LOG_IN}>
+						{this.state.authUser ? 'Sign Out' : 'Sign In'}
+					</HeaderItem>
+				</HeaderList>
+			)
 		);
 	}
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import FullScreenContainer from 'components/FullScreenContainer';
 import Logo from 'components/Animated/Logo';
-import Login from 'components/Login';
+import Signin from 'components/Signin';
 import { Redirect } from 'react-router-dom';
 import { withFirebase } from 'api/firebase';
 const MainPage = styled(FullScreenContainer)`
@@ -18,7 +18,6 @@ class App extends Component {
 	}
 	componentDidMount() {
 		this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-			console.log(authUser);
 			authUser ? this.setState({ authUser }) : this.setState({ authUser: null });
 		});
 	}
@@ -32,7 +31,7 @@ class App extends Component {
 		) : (
 			<MainPage>
 				<Logo />
-				<Login />
+				<Signin />
 			</MainPage>
 		);
 	}

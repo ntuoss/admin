@@ -13,8 +13,9 @@ import GlobalStyle from 'styles/GlobalStyle';
 import Theme from 'styles/Theme';
 
 import Header from 'components/Header';
+
 const HomePage = lazy(() => import('pages/HomePage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
+const SigninPage = lazy(() => import('pages/SigninPage'));
 const SignoutPage = lazy(() => import('pages/SignoutPage'));
 const NotFound = lazy(() => import('pages/NotFound'));
 const ProjectFormPage = lazy(() => import('pages/ProjectFormPage'));
@@ -34,7 +35,7 @@ class App extends Component {
 								<Suspense fallback={<div />}>
 									<Switch>
 										<Route exact path={ROUTE.LANDING} component={() => <HomePage />} />
-										<Route path={ROUTE.LOG_IN} component={() => <LoginPage />} />
+										<Route path={ROUTE.LOG_IN} component={() => <SigninPage />} />
 										<Route path={ROUTE.SIGN_OUT} component={() => <SignoutPage />} />
 										<PrivateRoute path={ROUTE.FORM} component={() => <ProjectFormPage />} />
 										<PrivateRoute path={ROUTE.PROJECTS} component={() => <ProjectsListPage />} />
