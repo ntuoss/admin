@@ -13,8 +13,10 @@ class Signin extends PureComponent {
     super(props);
     this.state = {
       processing: false,
-      email: process.env.REACT_APP_FIREBASE_EMAIL || '',
-      password: process.env.REACT_APP_FIREBASE_PASSWORD || ''
+      // prettier-ignore
+      email: process.env.REACT_APP_STAGE !== 'production' ? process.env.REACT_APP_FIREBASE_EMAIL : '',
+      // prettier-ignore
+      password: process.env.REACT_APP_STAGE !== 'production' ? process.env.REACT_APP_FIREBASE_PASSWORD : ''
     };
   }
   inputField = () => [

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, Component } from 'react';
 import ReactDOM from 'react-dom';
 import { FirebaseApp, FirebaseContext } from 'api/firebase';
-import * as serviceWorker from 'serviceWorker';
+// import * as serviceWorker from 'serviceWorker';
 import * as ROUTE from 'utils/routes';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -72,4 +72,4 @@ library.add(faUsers, faUserAlt, faCalendarAlt, faImage, faMapMarkerAlt);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-serviceWorker.unregister();
+// serviceWorker.unregister();
