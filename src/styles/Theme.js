@@ -2,7 +2,7 @@
 const DarkCyan = {
   bg: '#17252A',
   primary: '#FEFFFF',
-  secondary: '#2B7A78',
+  secondary: '#2B7A7855',
   highlight: '#3AAFA9',
   hint: '#A1b2b1',
   font: `"Cantarell", "Helvetica Neue",

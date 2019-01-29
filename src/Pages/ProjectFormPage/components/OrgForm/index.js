@@ -24,7 +24,9 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      processing: false
+      processing: false,
+      src:
+        'https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg'
     };
     this.person = new Org();
     this.submit = {
@@ -78,7 +80,7 @@ class App extends PureComponent {
           <BooleanBadge>placeholder</BooleanBadge>
         </SubSectionStart>
         <BreakLine />
-        <Avatar>+</Avatar>
+        <Avatar src={this.state.src} />
         <FillSection>
           {this.config().map(item => (
             <Input {...item} />

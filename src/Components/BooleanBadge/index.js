@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Badge = styled.span`
@@ -8,20 +8,26 @@ const Badge = styled.span`
   width: auto;
   margin: ${props => props.margin || '10px'};
   background: ${props =>
-    props.select ? props.theme.highlight : props.theme.secondary};
-  color: ${props => (props.select ? props.theme.primary : props.theme.hint)};
-  box-shadow: 0 0 ${props => (props.select ? '10px' : '0')}
+    props.select === false || (props.select && props.select.length === 0)
+      ? props.theme.secondary
+      : props.theme.highlight};
+  color: ${props =>
+    props.select === false || (props.select && props.select.length === 0)
+      ? props.theme.hint
+      : props.theme.primary};
+  box-shadow: 0 0
+    ${props =>
+      props.select === false || (props.select && props.select.length === 0)
+        ? '0'
+        : '10px'}
     ${props => props.theme.highlight};
   user-select: none;
   cursor: pointer;
-`;
-class BooleanBadge extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      select: false
-    };
+  &::after {
+    content: ${props => props.number};
   }
+`;
+class BooleanBadge extends Component {
   render() {
     return <Badge {...this.props} />;
   }

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Input from 'components/Input';
 import {
@@ -14,7 +14,19 @@ import {
 import Heading from 'components/Heading';
 import TextField from 'components/TextField';
 import BooleanBadge from 'components/BooleanBadge';
+import Popup from 'reactjs-popup';
 
+import Dependency from '../DependencyForm';
+import Prerequisite from '../PrerequisiteForm';
+
+const PopupStyled = styled(Popup)`
+  height: 60vh;
+  width: 63vw !important;
+  background: ${props => props.theme.bg + 'dd'} !important;
+  border: solid 3px ${props => props.theme.highlight} !important;
+  border-radius: 10px;
+  overflow: scroll;
+`;
 // export class Event {
 // 	id: string;
 // 	tgif: number; * x
@@ -26,15 +38,15 @@ import BooleanBadge from 'components/BooleanBadge';
 // 	githubUrl: string; * x
 // 	description: string; * x
 // 	promotion: string; * x
-// 	prerequisites: Prerequisite[]; * divider banner
-// 	dependencies: Dependency[]; * divider banner
+// 	prerequisites: Prerequisite[]; * divider banner x
+// 	dependencies: Dependency[]; * divider banner x
 // 	startTime: Date; * x
 // 	endTime: Date; * x
 // 	status: EventStatus;
 // 	public: boolean;
-// 	external: boolean; *
-// 	hasFood: boolean; *
-// 	hasDrinks: boolean; *
+// 	external: boolean; * x
+// 	hasFood: boolean; * x
+// 	hasDrinks: boolean; * x
 // 	remarks: string; * x
 // 	eventbrite: Publication;
 // 	facebook: Publication;
@@ -44,18 +56,6 @@ import BooleanBadge from 'components/BooleanBadge';
 // 	person: Person;
 // 	organisation: Organisation;
 // 	position: string;
-// }
-
-// export class Dependency { ***
-// 	label: string;
-// 	specification: string;
-// 	referenceUrl: string;
-// }
-
-// export class Prerequisite { ***
-// 	label: string;
-// 	proficiency: Proficiency;
-// 	referenceUrl: string;
 // }
 
 // Not included
@@ -70,6 +70,7 @@ const HeaderInput = styled(Input)`
   & > input {
     font-size: 2rem;
     background: ${props => (props.value ? 'transparent' : '')};
+    text-align: ${props => props.align || 'left'};
   }
 `;
 
@@ -77,12 +78,17 @@ const HalfSectionWrap = styled(HalfSection)`
   display: flex;
   flex-flow: row wrap;
 `;
-class App extends PureComponent {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tgif: '',
-      processing: false
+      processing: false,
+      food: false,
+      drink: false,
+      external: false,
+      prerequisite: [],
+      dependencies: []
     };
     this.submit = {
       key: 'submit',
@@ -98,9 +104,9 @@ class App extends PureComponent {
     {
       key: 'tagline',
       name: 'tagline',
-      label: 'tagline',
+      label: 'Tagline',
       type: 'text',
-      placeholder: 'Tagline',
+      placeholder: 'Attract audience',
       value: this.state.tagline,
       autoComplete: 'off',
       onChange: e => {
@@ -120,7 +126,6 @@ class App extends PureComponent {
       }
     }
   ];
-
   time = () => [
     {
       key: 'startTime',
@@ -182,6 +187,18 @@ class App extends PureComponent {
         })
     }
   ];
+  popupBadge = () => [
+    {
+      key: 'Pre-requisite',
+      select: this.state.prerequisite,
+      ele: Prerequisite
+    },
+    {
+      key: 'Dependency',
+      select: this.state.dependencies,
+      ele: Dependency
+    }
+  ];
   render() {
     return (
       <Form>
@@ -189,12 +206,14 @@ class App extends PureComponent {
           <Heading>TGIF #</Heading>
           <HeaderInput
             value={this.state.tgif}
-            width="3.5rem"
+            width="4.1rem"
             onChange={e => this.setState({ tgif: e.target.value })}
+            align="center"
           />
-          <Heading>{' : '}</Heading>
+          <Heading>{': '}</Heading>
           <FillSectionBase>
             <HeaderInput
+              label="Title"
               value={this.state.title}
               onChange={e => this.setState({ title: e.target.value })}
             />
@@ -211,7 +230,19 @@ class App extends PureComponent {
         <SubSection>
           <HalfSectionWrap>
             {this.booleanBadge().map(item => (
-              <BooleanBadge {...item}>{item.key}</BooleanBadge>
+              <BooleanBadge {...item} name={item.key} key={item.key}>
+                {item.key}
+              </BooleanBadge>
+            ))}
+            {this.popupBadge().map(item => (
+              <PopupStyled
+                trigger={<BooleanBadge {...item}>{item.key}</BooleanBadge>}
+                modal
+                closeOnDocumentClick
+                key={item.key}
+              >
+                {close => <item.ele close={close} />}
+              </PopupStyled>
             ))}
           </HalfSectionWrap>
           <HalfSection>

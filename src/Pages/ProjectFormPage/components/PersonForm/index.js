@@ -94,7 +94,7 @@ class App extends PureComponent {
           <BooleanBadge>placeholder</BooleanBadge>
         </SubSectionStart>
         <BreakLine />
-        <Avatar>+</Avatar>
+        <Avatar src={this.state.src} />
         <FillSection>
           <SubSection>
             {this.header().map(item => (

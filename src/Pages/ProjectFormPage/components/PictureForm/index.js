@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
 import Input from 'components/Input';
-import { Form, FullSection } from '../../styles/Form';
+import { Form, FullSection, ArtWork } from '../../styles/Form';
 // export class Artwork {
 // 	id: string;
 // 	title: string;
@@ -9,22 +8,6 @@ import { Form, FullSection } from '../../styles/Form';
 // 	artist: Person;
 // 	eventbriteId: string;
 // }
-
-const ArtWork = styled.div`
-  flex: 1 1 100%;
-  border-radius: 3px;
-  overflow: hidden;
-  background: ${props => props.theme.sencondary};
-  height: ${props => props.size || '50vh'};
-  width: ${props => props.size || '50vw'};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 3px ${props => props.theme.highlight};
-  font-size: 4rem;
-  color: ${props => props.theme.hint};
-  cursor: pointer;
-`;
 
 class App extends PureComponent {
   constructor(props) {
@@ -46,7 +29,7 @@ class App extends PureComponent {
   render() {
     return (
       <Form>
-        <ArtWork>+</ArtWork>
+        <ArtWork src={this.state.src} />
         <FullSection>
           <Input {...this.submit} />
         </FullSection>

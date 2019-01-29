@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
+  position: relative;
   margin: auto;
   width: ${props => props.width || '60vw'};
   display: flex;
@@ -34,14 +35,11 @@ export const FillSection = styled.section`
   flex: 1;
   padding: 2rem 0 2rem 2rem;
 `;
-
-export const Avatar = styled.div`
-  flex-shrink: 0;
-  border-radius: 50%;
+const ContentHolder = styled.div`
+  background: ${props => `url(${props.src})`};
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
-  background: ${props => props.theme.sencondary};
-  height: ${props => props.size || '14vw'};
-  width: ${props => props.size || '14vw'};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,6 +47,21 @@ export const Avatar = styled.div`
   font-size: 4rem;
   color: ${props => props.theme.hint};
   cursor: pointer;
+  &::after {
+    content: '+';
+    opacity: ${props => (props.src ? 0 : 1)};
+  }
+`;
+export const Avatar = styled(ContentHolder)`
+  border-radius: 50%;
+  height: ${props => props.size || '14vw'};
+  width: ${props => props.size || '14vw'};
+`;
+export const ArtWork = styled(ContentHolder)`
+  flex: 1 1 100%;
+  border-radius: 3px;
+  height: ${props => props.size || '50vh'};
+  width: ${props => props.size || '50vw'};
 `;
 
 export const BreakLine = styled.hr`

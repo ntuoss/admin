@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${props => props.theme.bg};
+    overflow: scroll;
   }
 `;
 
